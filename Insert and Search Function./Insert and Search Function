@@ -1,0 +1,113 @@
+// Example program
+#include <iostream>
+using namespace std;
+class node{
+    public:
+    int data;
+    node *left;
+    node *right;
+    node *parent;
+        node()
+        {
+            data=0;
+            left=NULL;
+            right=NULL;
+            parent=NULL;
+        }
+};
+class binary{
+    public:
+    node *root;
+    node* search(int x);
+    void display(node *temp);
+    void deletex(int x);
+    void insert(int x);
+        binary()
+            {
+                root=NULL;
+            }
+};
+    void binary::insert(int x)
+        {   
+            node *current;
+            node *parent;
+            node *temp=new node;
+            temp->data=x;
+            temp->right=NULL;
+            temp->left=NULL;
+            temp->parent=NULL;
+            if(root==NULL)
+                {
+                    root=temp;
+                }
+            else
+                {
+                    current=root;
+                    parent=NULL;
+                    while(2)
+                    {
+                        parent=current;
+                        if(x>parent->data)
+                            {
+                                current=current->right;
+                            if(current==NULL)
+                                {   
+                                    temp->parent=parent;
+                                    parent->right=temp;
+                                    return;
+                                }
+                            }
+                        else
+                            {
+                                current=current->left;
+                                if(current==NULL)
+                                    {   
+                                        temp->parent=parent;
+                                        parent->left=temp;
+                                        return;
+                                    }
+                            }
+                    }
+                }
+        }
+node* binary::search(int x)
+    {
+        node *slider=root;
+        if(root==NULL)
+            cout<<"Tree is empty"<<endl;
+        else
+        {
+        while(slider!=NULL)
+        if(slider->data==x)
+            {   
+                cout<<"Et Voilla, it's present in the tree"<<endl;
+                return slider;
+            }
+        else if(slider->data>x)
+            slider=slider->left;
+        else
+           slider=slider->right;
+        }
+        if(slider==NULL)
+            {
+                cout<<"It's not present in the tree"<<endl;
+                return slider;
+            }
+    }
+    int main()
+        {
+            binary b;
+            b.insert(6);
+            b.insert(7);
+            b.insert(3);
+            b.insert(2);
+            b.insert(67);
+            b.insert(1);
+            b.insert(8);
+            b.insert(54);
+            b.insert(4);
+            b.search(2);
+            cout<<(slider->right)->data;
+            return 0;
+        }
+                        
